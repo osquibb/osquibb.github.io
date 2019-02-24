@@ -12,7 +12,7 @@ header {
     margin: 25px 25px 15px 25px;
     text-align: center;
     font-weight: bold;
-    font-size: larger;
+    font-size: 1.75em;
 }
 
 section {
@@ -33,9 +33,10 @@ div.title {
     position: absolute;
     right: 0px;
     top: 0px;
+    font-size: 1.25em;
 }
 
-div.box {
+div.text {
     border: 1px solid black;
     position: absolute;
     padding: 35px 10px 10px 10px;
