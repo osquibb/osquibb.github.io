@@ -14,6 +14,7 @@
   // Dummy JSON array
   var images = [image, image, image, image, image];
 
+  // test array ***
   var jsonImages = []
 
 
@@ -21,6 +22,15 @@
   document.addEventListener("DOMContentLoaded", function (event) {
 
     buildAndShowImageTiles("#main-content", images);
+
+    // JSON test area ***
+
+    $ajaxUtils.sendGetRequest("data/images.json", function(response) {
+      console.log(response[0]); }, true);
+
+    // JSON test area ***
+
+
 
   }); // .addEventListener end
 
