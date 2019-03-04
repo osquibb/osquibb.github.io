@@ -1,24 +1,37 @@
-// TODO: Create a JSON file that contains image urls, titles & descriptions
-// for the tiles.  Then populate the tiles with the buildAndShowImageTiles function.
+// TODO: Create a JSON file (and get with ajax request) that populates
+// the tiles with the buildAndShowImageTiles function.
 
-(function (window) {
+(function (window) { // IIFE start
 
-  var imageInfo = {};
 
+  var image = {
+    url: "images/icon.png",
+    title: "Image Title",
+    description: "Some quick example text.",
+    link: "https://www.google.com"
+  };
+  // Dummy JSON array
+  var images = [image, image, image, image, image];
+
+
+// .addEventListener start
   document.addEventListener("DOMContentLoaded", function (event) {
 
-    buildAndShowImageTiles("#main-content", 8);
+    buildAndShowImageTiles("#main-content", images);
+
+  }); // .addEventListener end
 
 
-  });
-
-
-  function buildAndShowImageTiles (selector, numberOfTiles) {
+  function buildAndShowImageTiles (selector, images) {
 
     $ajaxUtils.sendGetRequest("snippets/image-snippet.html", function (response)
     {
       var finalHTML = '<section class="row">';
-      for (var i = 0; i < numberOfTiles; i++) {
+      for (var i = 0; i < images.length; i++) {
+        response = insertProperty(response, "image-url", images[i].url);
+        response = insertProperty(response, "image-title", images[i].title);
+        response = insertProperty(response, "image-description", images[i].description);
+        response = insertProperty(response, "image-link", images[i].link);
         finalHTML += response;
       };
       finalHTML += '</section>';
@@ -26,10 +39,15 @@
       }, false);
   }
 
-
   function insertHTML (selector, html) {
     var targetElem = document.querySelector(selector);
     targetElem.innerHTML = html;
   }
 
-})(window);
+  function insertProperty (string, propName, propValue) {
+    var propToReplace = "{{" + propName + "}}";
+    string = string.replace(new RegExp(propToReplace, "g"), propValue);
+    return string;
+}
+
+})(window); // IIFE end
