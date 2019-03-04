@@ -1,4 +1,5 @@
-// TODO: Create a JSON file (and get with ajax request) that populates
+// TODO: Create a JSON file, actually an array of json strings
+// (and get with ajax request) that populates
 // the tiles with the buildAndShowImageTiles function.
 
 (function (window) { // IIFE start
@@ -12,6 +13,8 @@
   };
   // Dummy JSON array
   var images = [image, image, image, image, image];
+
+  var jsonImages = []
 
 
 // .addEventListener start
