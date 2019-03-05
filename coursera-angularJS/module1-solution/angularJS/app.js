@@ -29,10 +29,13 @@ function LunchCheckController ($scope) {
     // update message
     if (menuCount == 0) {
       $scope.message = "Please enter data first";
+      $scope.messageColor = "red";
     } else if (menuCount <= 3) {
       $scope.message = "Enjoy!";
+      $scope.messageColor = "green";
     } else {
       $scope.message = "Too Much!"
+      $scope.messageColor = "green";
     }
 
   };
