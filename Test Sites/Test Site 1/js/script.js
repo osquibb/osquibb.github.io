@@ -1,25 +1,12 @@
-// $(function () { // Same as document.addEventListener("DOMContentLoaded"...
-//   $('#navbarDropdown').blur(function (event) {
-//     var screenWidth = window.innerWidth;
-//     if (screenWidth < 768) {
-//       $('dropdown').collapse('hide');
-//   }
-// });
-
-
 (function (window) { // IIFE start
 
 // .addEventListener start
   document.addEventListener("DOMContentLoaded", function (event) {
 
-
-
+    // hide drowpdown when dropdown button is not in focus
     $(".navbar-toggler").blur(function (event) {
-    var screenWidth = window.innerWidth;
-    if (screenWidth < 768) {
-      $("#navbarSupportedContent").collapse('hide');
-    }
-  });
+      $("#navbarSupportedContent").collapse('hide'); }
+    );
 
 
     // GET images json, then buildAndShowImageTiles
