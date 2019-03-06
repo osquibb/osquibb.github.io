@@ -19,7 +19,7 @@
 
   function buildAndShowImageTiles (selector, images) {
 
-    $ajaxUtils.sendGetRequest("snippets/image-snippet.html", function (response)
+    $ajaxUtils.sendGetRequest("snippets/image-tile-snippet.html", function (response)
     {
       // assign response's original state (w/ {{}}}) to snippet
       var snippet = response;
