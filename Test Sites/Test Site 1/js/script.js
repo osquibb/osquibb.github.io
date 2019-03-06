@@ -1,11 +1,29 @@
+// $(function () { // Same as document.addEventListener("DOMContentLoaded"...
+//   $('#navbarDropdown').blur(function (event) {
+//     var screenWidth = window.innerWidth;
+//     if (screenWidth < 768) {
+//       $('dropdown').collapse('hide');
+//   }
+// });
+
+
 (function (window) { // IIFE start
 
 // .addEventListener start
   document.addEventListener("DOMContentLoaded", function (event) {
 
+
+
+    $(".navbar-toggler").blur(function (event) {
+    var screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      $("#navbarSupportedContent").collapse('hide');
+    }
+  });
+
+
     // GET images json, then buildAndShowImageTiles
     $ajaxUtils.sendGetRequest("data/images.json", function(response) {
-      console.log(response[1]);
       buildAndShowImageTiles("#main-content", response);
       }, true);
 
