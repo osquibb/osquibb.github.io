@@ -8,6 +8,9 @@
       $("#navbarSupportedContent").collapse('hide'); }
     );
 
+    // *** TODO: Finish buildAndShowImageCarousel()...
+    buildAndShowImageCarousel();
+    // ***
 
     // GET images json, then buildAndShowImageTiles
     $ajaxUtils.sendGetRequest("data/images.json", function(response) {
@@ -16,6 +19,14 @@
 
   }); // .addEventListener end
 
+  // *** TODO: Finish buildAndShowImageCarousel()...
+  function buildAndShowImageCarousel (selector) {
+    $ajaxUtils.sendGetRequest("snippets/image-carousel-snippet.html", function (response)
+    {
+      console.log(response);
+    }, false);
+  }
+  // ***
 
   function buildAndShowImageTiles (selector, images) {
 
