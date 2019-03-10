@@ -1,47 +1,72 @@
 (function() {
-'use strict';
 
-angular.module('LunchCheck', [])
-.controller('LunchCheckController', LunchCheckController);
+  angular.module('ShoppingListCheckOff', [])
+  .controller('ToBuyController', ToBuyController)
+  .controller('AlreadyBoughtController', AlreadyBoughtController)
+  .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-LunchCheckController.$inject = ['$scope'];
+  ToBuyController.$inject = ['ShoppingListCheckOffService'];
+  function ToBuyController(ShoppingListCheckOffService) {
 
-function LunchCheckController ($scope) {
-  $scope.message = "";
-  $scope.lunchMenu = "";
+    this.items = ShoppingListCheckOffService.getToBuyItems();
 
-  $scope.checkMenu = function () {
-    // convert lunchMenu into an array
-    var lunchMenuArray= $scope.lunchMenu.split(',');
+    this.buyItem = function(itemIndex) {
+      ShoppingListCheckOffService.buyItem(itemIndex);
+    };
 
-    // Utility function checks if string is null or empty
-    var isNullOrEmpty = function (str) {
-      return !str || !str.trim();
-    }
+    this.isEmpty = function() {
+      return(this.items.length === 0);
+    };
 
-    var menuCount = 0;
-    // compute number of items in Menu
-    for(var i = 0; i < lunchMenuArray.length; i++) {
-      if(!isNullOrEmpty(lunchMenuArray[i])) {
-        menuCount += 1;
-      }
-    }
-    // update message
-    if (menuCount == 0) {
-      $scope.message = "Please enter data first";
-      $scope.messageColor = "red";
-    } else if (menuCount <= 3) {
-      $scope.message = "Enjoy!";
-      $scope.messageColor = "green";
-    } else {
-      $scope.message = "Too Much!"
-      $scope.messageColor = "green";
-    }
+  }
 
-  };
+  AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+  function AlreadyBoughtController(ShoppingListCheckOffService) {
+
+    this.items = ShoppingListCheckOffService.getBoughtItems();
+
+    this.isEmpty = function() {
+      return(this.items.length === 0);
+    };
+
+  }
+
+  function ShoppingListCheckOffService() {
+
+    var toBuyItems = [
+      {name: "cookies",
+      quantity: 10},
+      {name: "chips",
+      quantity: 5},
+      {name: "tomatoes",
+      quantity: 2},
+      {name: "avocados",
+      quantity: 3},
+      {name: "tortillas",
+      quantity: 10},
+    ];
+
+    var boughtItems = [];
+
+    this.buyItem = function(itemIndex) {
+      var item = toBuyItems[itemIndex];
+      boughtItems.push(item);
+      toBuyItems.splice(itemIndex,1);
+    };
+
+    this.getToBuyItems = function() {
+      return toBuyItems;
+    };
+
+    this.getBoughtItems = function() {
+      return boughtItems;
+    };
+
+  }
 
 
 
-}
+
+
 
 })();
