@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="NarrowItDownApp">
   <head>
     <title>Narrow Down Your Menu Choice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/styles.css">
   </head>
 <body>
-   <div class="container">
+   <div class="container" ng-controller="NarrowItDownController as narrowCtrl">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group">
@@ -21,5 +21,7 @@
     <found-items found-items="...." on-remove="...."></found-items>
   </div>
 
+<script src="angularJS/angular.min.js"></script>
+<script src="angularJS/app.js"></script>
 </body>
 </html>
