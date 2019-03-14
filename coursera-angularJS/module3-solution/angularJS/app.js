@@ -3,19 +3,27 @@
   angular.module('NarrowItDownApp', [])
   .controller('NarrowItDownController', NarrowItDownController)
   .service('MenuSearchService', MenuSearchService)
-  .directive('foundItems', FoundItems)
-  .constant('APIBasePath', 'https://davids-restaurant.herokuapp.com');
+  .constant('APIBasePath', 'https://davids-restaurant.herokuapp.com')
+  .directive('foundItems', FoundItems);
 
   NarrowItDownController.$inject = ['MenuSearchService'];
   function NarrowItDownController(MenuSearchService) {
 
     narrowCtrl = this;
 
-    narrowCtrl.searchMenu = function(searchTerm) {
-      var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
-      promise.then(function(result){
-        narrowCtrl.found = result;
-      });
+    narrowCtrl.searchMenu = function() {
+      if(narrowCtrl.searchTerm === "") {
+        narrowCtrl.found = [];
+      } else {
+        var promise = MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm);
+        promise.then(function(result){
+          narrowCtrl.found = result;
+        });
+      }
+    };
+
+    narrowCtrl.removeItem = function(itemIndex) {
+      narrowCtrl.found.splice(itemIndex, 1);
     };
   }
 
@@ -48,10 +56,24 @@
   function FoundItems() {
 
     var ddo = {
-
+      templateUrl:'found_items.html',
+      scope: {
+        found: '<',
+        onRemove: '&'
+      },
+      controller: FoundItemsController,
+      controllerAs: 'ctrl',
+      bindToController: true
     };
     return ddo;
+  }
 
+  function FoundItemsController() {
+    ctrl = this;
+
+    ctrl.isEmpty = function() {
+      return (ctrl.found === undefined || ctrl.found.length === 0);
+    };
   }
 
 

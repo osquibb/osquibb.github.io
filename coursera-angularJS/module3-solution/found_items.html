@@ -1,0 +1,19 @@
+
+<style>
+  span {
+    font-weight: bold;
+  }
+  #Nothing {
+    font-style: italic;
+  }
+</style>
+
+<h3>Search Results:</h3>
+<br>
+<div id="Nothing" ng-if="ctrl.isEmpty();">Nothing Found</div>
+<div ng-if="!ctrl.isEmpty();" ng-repeat="item in ctrl.found">
+  <p><span>Menu Item: </span>{{item.name}} ({{item.short_name}})</p>
+  <p><span>Description: </span>{{item.description}}</p>
+  <button ng-click="ctrl.onRemove({itemIndex: $index})">Don't want this one!</button>
+  <hr>
+</div>
