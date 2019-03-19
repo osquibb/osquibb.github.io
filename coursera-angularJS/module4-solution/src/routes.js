@@ -16,29 +16,23 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     url: '/',
     templateUrl: 'src/menuapp/templates/home.html'
   })
-  .state('home.test', {
-    url: 'test',
-    template: "Test View Here.  hello it works"
-  })
   .state('home.categories', {
     url: 'categories',
     template: '<categories categories="ctrl.categories"></categories>', //??
-    controller: 'CategoriesCtrl as ctrl'
-    // resolve: {
-    //   categories: ['MenuDataService', function(MenuDataService) {
-    //                 return MenuDataService.getAllCategories();
-    //               }]
-    // }
+    controller: 'CategoriesCtrl as ctrl',
+    resolve: {
+      categories: ['MenuDataService', function (MenuDataService) {
+        return MenuDataService.getAllCategories();
+      }]
+    }
   });
-
-
 
 }
 
-CategoriesCtrl.$inject = [];
-function CategoriesCtrl() {
+CategoriesCtrl.$inject = ['MenuDataService', 'categories'];
+function CategoriesCtrl(MenuDataService, categories) {
   var ctrl = this;
-  ctrl.categories = "Test Categories";
+  ctrl.categories = categories.data;
 
 }
 

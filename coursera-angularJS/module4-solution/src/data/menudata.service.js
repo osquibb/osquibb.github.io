@@ -16,7 +16,7 @@ function MenuDataService($http, APIBasePath) {
     });
   };
 
-  menu.getItemsForCategory(categoryShortName) = function() {
+  menu.getItemsForCategory = function(categoryShortName) {
     return $http({
       method: 'GET',
       url: (APIBasePath + '/menu_items.json'),
@@ -25,6 +25,7 @@ function MenuDataService($http, APIBasePath) {
   };
 
 }
+
 
 
 })();
