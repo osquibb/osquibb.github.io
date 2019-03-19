@@ -1,0 +1,5 @@
+li[ui-sref]:hover {
+  cursor: pointer;
+  font-weight: bold;
+  color: blue;
+}
