@@ -28,13 +28,13 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     }
   })
   .state('home.items', {
-    url: 'items',
+    url: 'items/{catShortName}',
     template: '<items items="iCtrl.items" category="iCtrl.category"></items>',
     controller: 'ItemsCtrl as iCtrl',
     resolve: {
       items: ['MenuDataService', '$stateParams',
         function(MenuDataService, $stateParams) {
-          return MenuDataService.getItemsForCategory('L');
+          return MenuDataService.getItemsForCategory($stateParams.catShortName);
         }]
     }
   });
